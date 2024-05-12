@@ -1,5 +1,3 @@
-// See: https://sass-lang.com/
-
 body,
 html {
   margin: 0;
@@ -11,10 +9,9 @@ body {
   justify-content: start;
   align-items: center;
   min-height: 100vh;
-  background:#ffe7c3;
+  background: #ffe7c3;
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
 }
-

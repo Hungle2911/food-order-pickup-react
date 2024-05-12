@@ -1,5 +1,5 @@
 footer {
-  background-color:#8a508f;
+  background-color: #8a508f;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,14 +11,14 @@ footer {
   margin-top: auto;
 }
 
-.footer-left{
+.footer-left {
   display: flex;
   align-items: baseline;
   gap: 15px;
   font-size: 1.3em;
 }
 
-.footer-mid{
+.footer-mid {
   display: flex;
   flex-direction: column;
   align-items: flex-end;

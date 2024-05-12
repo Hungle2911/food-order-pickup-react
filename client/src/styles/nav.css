@@ -20,7 +20,7 @@ nav {
 .nav-left {
   display: flex;
   height: 7em;
-  padding-left:10px;
+  padding-left: 10px;
   z-index: 10;
 }
 
@@ -50,7 +50,6 @@ nav {
 .nav-right p:hover {
   color: #f55536;
 }
-
 
 .nav-right a {
   text-decoration: none;
