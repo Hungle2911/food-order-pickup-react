@@ -6,14 +6,16 @@ const database = require('../db/queries/database');
 GET /menu: Retrieve the list of menu items.
 GET /menu/:id: Retrieve a specific menu item by its ID.
 */
-router.get('/', (req, res) => {
-  database
-    .getMenuItems()
-    .then(menuItems => {
-      res.render('index', { menuItems })
-      // console.log(menuItems);
+router.get('/', async (req, res) => {
+  try {
+    const result = await database.getMenuItems()
+    res.status(200).json({
+      status: 'success',
+      data: { result }
     })
-    .catch(err => console.error(err));
+  } catch (error) {
+    console.error(error)
+  }
 });
 
 
