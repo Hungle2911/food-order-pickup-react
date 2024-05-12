@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "local": "nodemon -L --ignore public/",
-    "db:reset": "node bin/resetdb.js"
+    "local": "nodemon server.js"
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
