@@ -27,14 +27,13 @@ router.get('/', (req, res) => {
 
 // POST /cart/add: Add an item to the cart.
 
-router.post('/', (req, res) => {
-  const { menu_item_id, quantity } = req.body;
-  database.addItemToCart(menu_item_id, quantity)
-    .then((result) => {
-      console.log('Item was added');
-    }).catch((err) => {
-      console.error(err)
-    });
+router.post('/', async (req, res) => {
+  try {
+    const { menu_item_id, quantity } = req.body;
+    const data = await database.addItemToCart(menu_item_id, quantity)
+  } catch (error) {
+    console.error(error)
+  }
 })
 // PUT /cart/increment: Add quantity to the cart.
 

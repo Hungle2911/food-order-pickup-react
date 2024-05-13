@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import AddToCart from "./AddToCart";
 const URL = `http://localhost:8070`
 function MenuList() {
 const [items, setItems] = useState([]);
@@ -7,10 +8,24 @@ const getMenuItems = async () =>{
   const response = await fetch(`${URL}/api/menu`)
   const result = await response.json()
   setItems(result.data)
-  console.log(result.data);
+  // console.log(result.data);
  } catch (error) {
   console.error(error)
  }
+}
+const sendItemsToCart = async (item) => {
+  try {
+    const menu_item_id = item.id
+    const quantity = 1
+    const body = {menu_item_id, quantity}
+    const response = await fetch(`${URL}/api/cart`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 useEffect(() => {
   getMenuItems()
@@ -53,6 +68,7 @@ useEffect(() => {
       <button
         className="addToCartBtn"
         role="button"
+        onClick={() => {sendItemsToCart(item)}}
       >
         Add to Cart
       </button>
@@ -65,3 +81,4 @@ useEffect(() => {
 }
 
 export default MenuList
+export {URL}
