@@ -8,10 +8,10 @@ GET /menu/:id: Retrieve a specific menu item by its ID.
 */
 router.get('/', async (req, res) => {
   try {
-    const result = await database.getMenuItems()
+    const data = await database.getMenuItems()
     res.status(200).json({
       status: 'success',
-      data: { result }
+      data
     })
   } catch (error) {
     console.error(error)

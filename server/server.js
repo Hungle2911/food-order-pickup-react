@@ -4,7 +4,7 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
-
+const cors = require('cors')
 const PORT = process.env.PORT || 8070;
 const app = express();
 
@@ -14,6 +14,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cors())
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -42,3 +43,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+

@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 const Home = () => {
   return (
-    <>
+    <div className="home-page">
   <div className="home-title">
     <h1>Calcifer's Hearth</h1>
   </div>
@@ -29,7 +29,7 @@ const Home = () => {
       alt="Calcifer Logo"
     />
   </div>
-</>
+</ div>
 
   )
 }
