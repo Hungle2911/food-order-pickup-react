@@ -13,23 +13,10 @@ const getMenuItems = async () =>{
   console.error(error)
  }
 }
-const sendItemsToCart = async (item) => {
-  try {
-    const menu_item_id = item.id
-    const quantity = 1
-    const body = {menu_item_id, quantity}
-    const response = await fetch(`${URL}/api/cart`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(body)
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
 useEffect(() => {
   getMenuItems()
 }, [])
+
   return (
     <>
     <div className="menu-box">
@@ -65,13 +52,7 @@ useEffect(() => {
         <p className="item-description">{item.description} </p>
       </span>
       <span className="item-cost">${item.cost}</span>
-      <button
-        className="addToCartBtn"
-        role="button"
-        onClick={() => {sendItemsToCart(item)}}
-      >
-        Add to Cart
-      </button>
+      <AddToCart item={item}/>
     </li>
      ))}
      </ul>
