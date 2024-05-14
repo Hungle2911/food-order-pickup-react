@@ -14,15 +14,15 @@ POST /cart/clear: Clear all items from the cart.
 
 // GET /cart: Retrieve all items currently in the customer's cart.
 router.get('/', (req, res) => {
-  database
-    .getCartItems()
-    .then(cartItems => {
-      totalPrice = sum(cartItems)
-      res.render('cart', { cartItems, totalPrice, mergeQuantity })
-      console.log(totalPrice);
-    })
-    .catch(err => console.error(err));
-
+  // database
+  //   .getCartItems()
+  //   .then(cartItems => {
+  //     totalPrice = sum(cartItems)
+  //     res.render('cart', { cartItems, totalPrice, mergeQuantity })
+  //     console.log(totalPrice);
+  //   })
+  //   .catch(err => console.error(err));
+  res.send('hi')
 });
 
 // POST /cart/add: Add an item to the cart.
@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { menu_item_id, quantity } = req.body;
+    console.log(req.body);
     const data = await database.addItemToCart(menu_item_id, quantity)
   } catch (error) {
     console.error(error)
