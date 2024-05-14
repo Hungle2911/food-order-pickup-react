@@ -12,9 +12,9 @@ const app = express();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
-app.use(cors())
+app.use(express.urlencoded({ extended: true })); //Parsing incoming request bodies URL-encoded form data
+app.use(express.json()) // Parsing req body
+app.use(cors()) // Enable cross-platform data exchange
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -27,7 +27,6 @@ const index = require('./router/index');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
-// app.use('/api', orderRoutes);
 app.use('/api', index);
 // app.use('/cart', cartRoutes)
 // Note: mount other resources here, using the same pattern above

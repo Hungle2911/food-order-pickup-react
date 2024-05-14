@@ -13,16 +13,23 @@ POST /cart/clear: Clear all items from the cart.
 
 
 // GET /cart: Retrieve all items currently in the customer's cart.
-router.get('/', (req, res) => {
-  // database
-  //   .getCartItems()
+router.get('/', async (req, res) => {
+  try {
+    const data = await database.getCartItems()
+    console.log(data);
+    res.status(200).json({
+      status: 'success',
+      data
+    })
+  } catch (error) {
+    console.error(error)
+  }
   //   .then(cartItems => {
   //     totalPrice = sum(cartItems)
   //     res.render('cart', { cartItems, totalPrice, mergeQuantity })
   //     console.log(totalPrice);
   //   })
   //   .catch(err => console.error(err));
-  res.send('hi')
 });
 
 // POST /cart/add: Add an item to the cart.
