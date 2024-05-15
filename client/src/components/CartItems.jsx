@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react'
 import { URL } from './MenuList'
 function CartItems() {
   const [cartItems, setCartItems] = useState([])
+  const deleteCartItems = async (id, menu_item_id) => {
+    try {
+      const body = {id, menu_item_id}
+      const response = await fetch(`${URL}/api/cart`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+      })
+      setCartItems(cartItems.filter(item => {return item.item_id !== menu_item_id }))
+    } catch (error) {
+      console.error(error)
+    }
+  }
   const getCartItems = async () => {
     try {
       const response = await fetch(`${URL}/api/cart`)
@@ -35,6 +48,7 @@ function CartItems() {
         </span>
         <button
         className="deleteCart"
+        onClick={() => {deleteCartItems(item.cart_id, item.item_id)}}
       >
         Remove
       </button>

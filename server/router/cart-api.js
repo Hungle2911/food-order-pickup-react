@@ -29,7 +29,6 @@ router.get('/', async (req, res) => {
   //     res.render('cart', { cartItems, totalPrice, mergeQuantity })
   //     console.log(totalPrice);
   //   })
-  //   .catch(err => console.error(err));
 });
 
 // POST /cart/add: Add an item to the cart.
@@ -79,23 +78,29 @@ router.put('/decrement', (req, res) => {
       res.status(500).send('Error decreasing quantity'); // Send error response
     });
 });
-// POST /cart/remove: Remove an item from the cart.
-router.delete('/', (req, res) => {
-  const { id, menu_item_id } = req.body;
-  database.deleteCartItems(id, menu_item_id)
-    .then((result) => {
-      return database.getCartItems();
-    })
-    .then(cartItems => {
-      console.log(cartItems);
-      const totalPrice = sum(cartItems);
-      // Send the updated total price along with a success status
-      res.status(200).json({ totalPrice })
-    })
-    .catch((err) => {
-      console.error('Error deleting item:', err);
-      res.status(500).send('Error deleting item'); // Send error response
-    });
+// DELETE api/cart: Remove an item from the cart.
+router.delete('/', async (req, res) => {
+  try {
+    const { id, menu_item_id } = req.body;
+    const deleteData = await database.deleteCartItems(id, menu_item_id)
+    res.json('Item was deleted')
+  } catch (error) {
+    console.error(error)
+  }
+
+    // .then((result) => {
+    //   return database.getCartItems();
+    // })
+    // .then(cartItems => {
+    //   console.log(cartItems);
+    //   const totalPrice = sum(cartItems);
+    //   // Send the updated total price along with a success status
+    //   res.status(200).json({ totalPrice })
+    // })
+    // .catch((err) => {
+    //   console.error('Error deleting item:', err);
+    //   res.status(500).send('Error deleting item'); // Send error response
+    // });
 });
 
 
