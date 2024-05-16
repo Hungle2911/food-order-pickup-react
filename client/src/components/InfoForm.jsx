@@ -16,7 +16,8 @@ function InfoForm() {
         body: JSON.stringify(body)
       })
       const result = await response.json()
-      // window.location = `/order:${result}`
+      // console.log(result);
+      window.location = `/order`
     } catch (error) {
       console.error(error)
     }

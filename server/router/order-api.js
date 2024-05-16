@@ -46,17 +46,26 @@ router.post('/', async (req, res) => {
 });
 
 // GET /order/:id: Retrieve details of a specific order by its ID.
-router.get('/:id', (req, res) => {
-  let order_code = req.params.id
-  database
-    .getOrder(order_code)
-    .then(orderDetails => {
-      res.render('order', { orderDetails, mergeQuantity })
+router.get('/:id', async (req, res) => {
+  try {
+    const order_code = req.params.id
+    const data = await database.getOrder(order_code)
+    res.status(200).json({
+      status: 'success',
+      data
     })
-    .then((result) => {
-      return database.deleteCart()
-    })
-    .catch(err => console.error(err));
+    const deleteCart = await database.deleteCart()
+  } catch (error) {
+    console.error(error)
+  }
+  // database
+  //   .getOrder(order_code)
+  //   .then(orderDetails => {
+  //     res.render('order', { orderDetails, mergeQuantity })
+  //   })
+  //   .then((result) => {
+  //     return database.deleteCart()
+  //   })
 });
 
 
