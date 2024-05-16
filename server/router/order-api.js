@@ -4,8 +4,6 @@ const database = require('../db/queries/database');
 const { sum, randomCodeGenerator, mergeQuantity } = require('./helper/helper-function')
 // const { sendOrderConfirmation } = require('../send-message');
 
-// Middleware to parse JSON bodies
-// router.use(express.json());
 /*
 Order Routes:
 POST /order: Place a new order. This route should include the items in the cart, customer details, and any additional order information.
@@ -15,9 +13,16 @@ GET /order/:id: Retrieve details of a specific order by its ID.
 // POST /order: Place a new order. This route should include the items in the cart, customer details, and any additional order information.
 router.post('/', async (req, res) => {
   try {
-   const { instructions, client_name, phone_number } = req.body;
-   let order_code = randomCodeGenerator()
-   const data = await database.placeOrder(order_code, total_cost, instructions, client_name, phone_number)
+    const { instructions, client_name, phone_number } = req.body;
+    let order_code = randomCodeGenerator()
+    const carts = await database.getCartItems()
+    const total_cost = await sum(carts);
+    const data = await database.placeOrder(order_code, total_cost, instructions, client_name, phone_number)
+    // console.log(data);
+    res.status(200).json({
+      status: 'success',
+      data: data.order_id
+    })
   } catch (error) {
     console.error(error)
   }

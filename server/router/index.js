@@ -5,5 +5,5 @@ const cart = require('./cart-api')
 const order = require('./order-api')
 router.use("/menu", menu_items);
 router.use("/cart", cart)
-router.use("order", order)
+router.use("/order", order)
 module.exports = router;
