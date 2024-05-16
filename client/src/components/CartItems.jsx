@@ -33,7 +33,7 @@ function CartItems() {
     const newTotal = cartItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0);
     setTotalPrice(newTotal);
   }, [cartItems]);
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <>
   <div className="cart-title">
@@ -60,9 +60,6 @@ function CartItems() {
       </button>
     </li>
     ))}
-    <div id="totalPrice" className="cart-total">
-    <p className="total-amount">Total Price: ${totalPrice} </p>
-  </div>
 
         {/* <button
           className="decrease-btn"
@@ -80,6 +77,9 @@ function CartItems() {
         </button> */}
 
   </ul>
+  <div id="totalPrice" className="cart-total">
+    <p className="total-amount">Total Price: ${totalPrice} </p>
+  </div>
 </>
 
   )

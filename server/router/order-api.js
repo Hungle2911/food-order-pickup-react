@@ -13,27 +13,31 @@ GET /order/:id: Retrieve details of a specific order by its ID.
 */
 
 // POST /order: Place a new order. This route should include the items in the cart, customer details, and any additional order information.
-router.post('/', (req, res) => {
-  const { instructions, client_name, phone_number } = req.body;
-  let order_code = randomCodeGenerator()
+router.post('/', async (req, res) => {
+  try {
+   const { instructions, client_name, phone_number } = req.body;
+   let order_code = randomCodeGenerator()
+   const data = await database.placeOrder(order_code, total_cost, instructions, client_name, phone_number)
+  } catch (error) {
+    console.error(error)
+  }
 
-  database
-    .getCartItems()
-    .then(carts => {
-      const total_cost = sum(carts);
-      return { total_cost }
-    })
-    .then((result) => {
-      const { total_cost } = result
-      return database.placeOrder(order_code, total_cost, instructions, client_name, phone_number)
-    })
-    .then(menuItems => {
-      //to send the text message to the customer when they click on place order button
-      // sendOrderConfirmation();
+  // database
+  //   .getCartItems()
+  //   .then(carts => {
+  //     const total_cost = sum(carts);
+  //     return { total_cost }
+  //   })
+  //   .then((result) => {
+  //     const { total_cost } = result
+  //     return database.placeOrder(order_code, total_cost, instructions, client_name, phone_number)
+  //   })
+  //   .then(menuItems => {
+  //     //to send the text message to the customer when they click on place order button
+  //     // sendOrderConfirmation();
 
-      res.json({ redirect: `/order/${menuItems.order_id}` });
-    })
-    .catch(err => console.error(err));
+  //     res.json({ redirect: `/order/${menuItems.order_id}` });
+  //   })
 });
 
 // GET /order/:id: Retrieve details of a specific order by its ID.
