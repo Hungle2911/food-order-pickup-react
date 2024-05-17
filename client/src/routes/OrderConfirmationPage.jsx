@@ -1,17 +1,23 @@
 import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 import { URL } from "../components/MenuList"
-import { useState } from "react"
+import { useOrderContext } from '../context/OrderContext'
+import { useState, useEffect } from "react"
 const OrderConfirmationPage = () => {
   const [orderItems, setOrderItems] = useState([])
+  const { orderId, setOrderId } = useOrderContext();
   const getOrder = async () => {
     try {
-      const id = req.params
-      const res = fetch(`${URL}/api/order`)
+      const res = fetch(`${URL}/api/order:${orderId}`)
+      const result = await res.json()
+      console.log(result);
     } catch (error) {
       console.error(error)
     }
   }
+  useEffect(() => {
+    getOrder()
+  }, [])
   return(
     <>
     <NavBar />

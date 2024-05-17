@@ -1,22 +1,25 @@
 import React, {useState, useEffect} from 'react'
 import { URL } from './MenuList'
+import { useOrderContext } from '../context/OrderContext'
 function InfoForm() {
   const [name, setName] = useState('')
   const [instruction, setInstruction] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const { orderId, setOrderId } = useOrderContext();
   const sendCartOrder = async (e) => {
     e.preventDefault()
     try {
       const phone_number = phoneNumber
       const body = {name, instruction, phone_number}
-      console.log(body);
+      // console.log(body);
       const response = await fetch(`${URL}/api/order`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)
       })
       const result = await response.json()
-      // console.log(result);
+      setOrderId(result.data)
+      console.log(orderId);
       window.location = `/order`
     } catch (error) {
       console.error(error)
