@@ -1,55 +1,67 @@
-import NavBar from "../components/NavBar"
-import Footer from "../components/Footer"
-import { URL } from "../components/MenuList"
-import { useOrderContext } from '../context/OrderContext'
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+import { URL } from '../components/MenuList';
+
 const OrderConfirmationPage = () => {
-  const [orderItems, setOrderItems] = useState([])
-  const { orderId, setOrderId } = useOrderContext();
+  const [orderItems, setOrderItems] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
+  const { orderId } = useParams();
+
   const getOrder = async () => {
     try {
-      const res = fetch(`${URL}/api/order:${orderId}`)
-      const result = await res.json()
-      console.log(result);
+      const res = await fetch(`${URL}/api/order/${orderId}`);
+      const result = await res.json();
+      setOrderItems(result.data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      setLoading(false); // Ensure loading is set to false in case of an error
     }
-  }
-  useEffect(() => {
-    getOrder()
-  }, [])
-  return(
-    <>
-    <NavBar />
-    <div className="order-message">
-  <p>
-    Thank you so much for ordering. We will send you a notification as soon as
-    your order is ready!
-  </p>
-  &lt;% const order=mergeQuantity(orderDetails) %&gt; &lt;% if (order.length&gt;
-  0) {"{"} %&gt;
-  <ul>
-    &lt;% order.forEach(item=&gt; {"{"} %&gt;
-    <li>
-      <p>&lt;%= item.name %&gt; X &lt;%= item.quantity %&gt;</p>
-    </li>
-    &lt;% {"}"}) %&gt;
-  </ul>
-  <div>
-    <div>Order ID: &lt;%= order[0].order_code %&gt;</div>
-    <div>Order for: &lt;%= order[0].client_name %&gt;</div>
-    <div>Time of the order: &lt;%= order[0].date_time %&gt;</div>
-    <div>Total: $&lt;%= order[0].total_cost %&gt;</div>
-    <div>Order note: &lt;%= order[0].instructions %&gt;</div>
-    <div>Telephone: &lt;%= order[0].phone_number %&gt;</div>
-    &lt;% {"}"} else {"{"} %&gt;
-    <p>No order details found</p>
-    &lt;% {"}"} %&gt;
-  </div>
-</div>
+  };
 
-    <Footer />
+  useEffect(() => {
+    getOrder();
+  }, [orderId]); // Added orderId as a dependency
+
+  if (loading) {
+    return <div>Loading...</div>; // Loading state
+  }
+
+  if (orderItems.length === 0) {
+    return <div>No order details found.</div>; // Handle empty state
+  }
+
+  const order = orderItems[0]; // Assuming orderItems is an array with a single order object
+
+  return (
+    <>
+      <NavBar />
+      <div className="order-message">
+        <p>
+          Thank you so much for ordering. We will send you a notification as soon as
+          your order is ready!
+        </p>
+        {orderItems.map((item, index) => (
+          <ul key={index}>
+            <li>
+              <p> {item.name} X {item.quantity}</p>
+            </li>
+          </ul>
+        ))}
+        <div>
+          <div>Order ID: {order.order_code}</div>
+          <div>Order for: {order.client_name}</div>
+          <div>Time of the order: {order.date_time}</div>
+          <div>Total: ${order.total_cost}</div>
+          <div>Order note: {order.instructions}</div>
+          <div>Telephone: {order.phone_number}</div>
+        </div>
+      </div>
+      <Footer />
     </>
-  )
-}
-export default OrderConfirmationPage
+  );
+};
+
+export default OrderConfirmationPage;
