@@ -23,9 +23,9 @@ function CartItems() {
       <span className="cart-item-cost">
          {item.cost} X
         <span id="quantity"> {item.quantity}</span>
-        <button
+        {item.quantity > 1 && <button
         className="decrease-btn"
-        onClick={() => {decreaseCartItem(item.cart_id, item.item_id)}}> - </button>
+        onClick={() => {decreaseCartItem(item.cart_id, item.item_id)}}> - </button>}
         <button
         className="increase-btn"
         onClick={() => {increaseCartItem(item.cart_id, item.item_id)}}> + </button>
