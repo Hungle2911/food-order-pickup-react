@@ -8,7 +8,7 @@ function AddToCart({item}) {
       const quantity = 1
       const body = {menu_item_id, quantity}
       // console.log(body);
-      const response = await fetch(`${URL}/api/cart`, {
+      const response = await fetch(`${URL}/cart`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)

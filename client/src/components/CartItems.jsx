@@ -1,7 +1,7 @@
 import { useCartContext } from '../context/CartContext'
 import { useEffect } from 'react'
 function CartItems() {
-  const {cartItems, totalPrice, deleteCartItems, getCartItems} = useCartContext()
+  const {cartItems, totalPrice, deleteCartItems, getCartItems, increaseCartItem, decreaseCartItem} = useCartContext()
 
   useEffect(() => {
     getCartItems()
@@ -23,8 +23,12 @@ function CartItems() {
       <span className="cart-item-cost">
          {item.cost} X
         <span id="quantity"> {item.quantity}</span>
-        <button className="decrease-btn"> - </button>
-        <button className="increase-btn"> + </button>
+        <button
+        className="decrease-btn"
+        onClick={() => {decreaseCartItem(item.cart_id, item.item_id)}}> - </button>
+        <button
+        className="increase-btn"
+        onClick={() => {increaseCartItem(item.cart_id, item.item_id)}}> + </button>
         </span>
         <button
         className="deleteCart"

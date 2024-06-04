@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import AddToCart from "./AddToCart";
-const URL = `http://localhost:8070`
+const URL = `http://localhost:8070/api`
 function MenuList() {
 const [items, setItems] = useState([]);
 const getMenuItems = async () =>{
  try {
-  const response = await fetch(`${URL}/api/menu`)
+  const response = await fetch(`${URL}/menu`)
   const result = await response.json()
   setItems(result.data)
   // console.log(result.data);

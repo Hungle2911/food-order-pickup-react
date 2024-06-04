@@ -42,41 +42,32 @@ router.post('/', async (req, res) => {
     console.error(error)
   }
 })
-// PUT /cart/increment: Add quantity to the cart.
+// PATCH /cart/increment: Add quantity to the cart.
 
-router.put('/increment', (req, res) => {
-  const { id, menu_item_id } = req.body;
-  database.increaseQuantity(id, menu_item_id)
-    .then((result) => {
-      return database.getCartItems();
-    })
-    .then(cartItems => {
-      const totalPrice = sum(cartItems);
-      // Send the updated total price along with a success status
-      res.status(200).json({ totalPrice })
-    })
-    .catch((err) => {
-      console.error('Error increasing quantity:', err);
-      res.status(500).send('Error increasing quantity'); // Send error response
-    });
+router.put('/increment', async (req, res) => {
+  try {
+    const { id, menu_item_id } = req.body;
+    const data = await database.increaseQuantity(id, menu_item_id); // Ensure this function exists and updates the quantity
+    res.status(200).json('Quantity increased');
+  } catch (error) {
+    console.error('Error increasing quantity:', error);
+    res.status(500).json({ error: 'Failed to increase quantity' });
+  }
 });
-// PUT /cart/decrement: Decrease quantity to the cart.
 
-router.put('/decrement', (req, res) => {
-  const { id, menu_item_id } = req.body;
-  database.decreaseQuantity(id, menu_item_id)
-    .then((result) => {
-      return database.getCartItems();
-    })
-    .then(cartItems => {
-      const totalPrice = sum(cartItems);
-      // Send the updated total price along with a success status
-      res.status(200).json({ totalPrice, cartItems })
-    })
-    .catch((err) => {
-      console.error('Error decreasing quantity:', err);
-      res.status(500).send('Error decreasing quantity'); // Send error response
-    });
+
+
+// PATCH /cart/decrement: Decrease quantity to the cart.
+
+router.put('/decrement', async (req, res) => {
+  try {
+    const { id, menu_item_id } = req.body;
+    const data = await database.decreaseQuantity(id, menu_item_id); // Ensure this function exists and updates the quantity
+    res.status(200).json('Quantity decreased');
+  } catch (error) {
+    console.error('Error decreasing quantity:', error);
+    res.status(500).json({ error: 'Failed to decrease quantity' });
+  }
 });
 // DELETE api/cart: Remove an item from the cart.
 router.delete('/', async (req, res) => {

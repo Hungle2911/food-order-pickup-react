@@ -13,7 +13,7 @@ function InfoForm() {
       const client_name = name
       const body = {client_name, instructions, phone_number}
       // console.log(body);
-      const response = await fetch(`${URL}/api/order`, {
+      const response = await fetch(`${URL}/order`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)
