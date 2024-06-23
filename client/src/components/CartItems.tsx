@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import { URL } from './MenuList'
 function CartItems() {
   const [cartItems, setCartItems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
+  // const [] = useReducer(reducer, {})
   const deleteCartItems = async (id, menu_item_id) => {
     try {
       const body = {id, menu_item_id}
@@ -51,6 +52,16 @@ function CartItems() {
       <span className="cart-item-cost">
          {item.cost} X
         <span id="quantity"> {item.quantity}</span>
+        <button
+          className="decrease-btn"
+        >
+          -
+        </button>
+        <button
+          className="increase-btn"
+        >
+          +
+        </button>
         </span>
         <button
         className="deleteCart"
@@ -60,22 +71,6 @@ function CartItems() {
       </button>
     </li>
     ))}
-
-        {/* <button
-          className="decrease-btn"
-          data-id="<%= item.item_id %>"
-          data-cartid="<%= item.cart_id %>"
-        >
-          -
-        </button>
-        <button
-          className="increase-btn"
-          data-id="<%= item.item_id %>"
-          data-cartid="<%= item.cart_id %>"
-        >
-          +
-        </button> */}
-
   </ul>
   <div id="totalPrice" className="cart-total">
     <p className="total-amount">Total Price: ${totalPrice} </p>

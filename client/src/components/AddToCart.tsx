@@ -1,4 +1,3 @@
-import React from 'react'
 import { URL } from './MenuList'
 function AddToCart({item}) {
 

@@ -44,21 +44,27 @@ router.post('/', async (req, res) => {
 })
 // PUT /cart/increment: Add quantity to the cart.
 
-router.put('/increment', (req, res) => {
-  const { id, menu_item_id } = req.body;
-  database.increaseQuantity(id, menu_item_id)
-    .then((result) => {
-      return database.getCartItems();
-    })
-    .then(cartItems => {
-      const totalPrice = sum(cartItems);
-      // Send the updated total price along with a success status
-      res.status(200).json({ totalPrice })
-    })
-    .catch((err) => {
-      console.error('Error increasing quantity:', err);
-      res.status(500).send('Error increasing quantity'); // Send error response
-    });
+router.put('/increment', async (req, res) => {
+  try {
+    const { id, menu_item_id } = req.body;
+    const result = await database.increaseQuantity(id, menu_item_id)
+    res.json('Item\'s quantity was increased')
+  } catch (error) {
+    console.error(error)
+  }
+
+  // .then((result) => {
+  //   return database.getCartItems();
+  // })
+  // .then(cartItems => {
+  //   const totalPrice = sum(cartItems);
+  //   // Send the updated total price along with a success status
+  //   res.status(200).json({ totalPrice })
+  // })
+  // .catch((err) => {
+  //   console.error('Error increasing quantity:', err);
+  //   res.status(500).send('Error increasing quantity'); // Send error response
+  // });
 });
 // PUT /cart/decrement: Decrease quantity to the cart.
 
@@ -88,19 +94,6 @@ router.delete('/', async (req, res) => {
     console.error(error)
   }
 
-    // .then((result) => {
-    //   return database.getCartItems();
-    // })
-    // .then(cartItems => {
-    //   console.log(cartItems);
-    //   const totalPrice = sum(cartItems);
-    //   // Send the updated total price along with a success status
-    //   res.status(200).json({ totalPrice })
-    // })
-    // .catch((err) => {
-    //   console.error('Error deleting item:', err);
-    //   res.status(500).send('Error deleting item'); // Send error response
-    // });
 });
 
 

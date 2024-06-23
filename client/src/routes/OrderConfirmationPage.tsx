@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
-import { URL } from '../components/MenuList';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+import { URL } from "../components/MenuList";
 
 const OrderConfirmationPage = () => {
   const [orderItems, setOrderItems] = useState([]);
@@ -40,13 +40,16 @@ const OrderConfirmationPage = () => {
       <NavBar />
       <div className="order-message">
         <p>
-          Thank you so much for ordering. We will send you a notification as soon as
-          your order is ready!
+          Thank you so much for ordering. We will send you a notification as
+          soon as your order is ready!
         </p>
         {orderItems.map((item, index) => (
           <ul key={index}>
             <li>
-              <p> {item.name} X {item.quantity}</p>
+              <p>
+                {" "}
+                {item.name} X {item.quantity}
+              </p>
             </li>
           </ul>
         ))}
