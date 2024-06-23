@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import AddToCart from "./AddToCart";
-const URL = `http://localhost:8070`;
+const URL = import.meta.env.VITE_API_URL;
 function MenuList() {
   const [items, setItems] = useState([]);
   const getMenuItems = async () => {
     try {
-      const response = await fetch(`${URL}/api/menu`);
+      const response = await fetch(`${URL}/menu`);
       const result = await response.json();
       setItems(result.data);
-      // console.log(result.data);
     } catch (error) {
       console.error(error);
     }

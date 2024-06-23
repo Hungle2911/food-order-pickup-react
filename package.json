@@ -11,10 +11,6 @@
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
-  "dependencies": {
-    "dotenv": "^2.0.0",
-    "twilio": "^5.0.4"
-  },
   "bin": {
     "node-skeleton": "resetdb.js"
   },

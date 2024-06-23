@@ -11,7 +11,7 @@ const OrderConfirmationPage = () => {
 
   const getOrder = async () => {
     try {
-      const res = await fetch(`${URL}/api/order/${orderId}`);
+      const res = await fetch(`${URL}/order/${orderId}`);
       const result = await res.json();
       setOrderItems(result.data);
       setLoading(false); // Set loading to false after data is fetched
