@@ -10,7 +10,13 @@ export interface CartItem {
   item_id: number;
   quantity: number;
   cost: number;
+  photo_url: string;
+  name: string;
+  cart_id: number;
+
 }
+
+
 export interface CartContextType {
   cartItems: CartItem[];
   totalPrice: number;

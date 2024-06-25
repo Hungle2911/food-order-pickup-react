@@ -1,5 +1,6 @@
 import { useCartContext } from "../context/CartContext";
 import { useEffect } from "react";
+import { CartItem } from "../types";
 function CartItems() {
   const {
     cartItems,
@@ -19,7 +20,7 @@ function CartItems() {
         <h1>Cart</h1>
       </div>
       <ul id="foodCart" className="cart">
-        {cartItems.map((item) => (
+        {cartItems.map((item: CartItem) => (
           <li className="cart-item" key={item.cart_id}>
             <span className="cart-item-image">
               <img className="item-img" src={item.photo_url} />
