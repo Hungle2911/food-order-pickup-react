@@ -15,7 +15,7 @@ interface OrderContextType {
 }
 
 // Create the context with a default value
-const OrderContext = createContext<OrderContextType | undefined>(undefined);
+const OrderContext = createContext({} as OrderContextType);
 
 // Custom hook to use the OrderContext
 export const useOrderContext = () => {
