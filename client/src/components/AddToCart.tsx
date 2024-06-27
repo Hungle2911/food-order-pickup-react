@@ -18,7 +18,7 @@ function AddToCart({ item }) {
   };
   return (
     <button
-      className="addToCartBtn"
+      className="inline-flex items-center justify-center p-2 rounded-full bg-white text-gray-700 shadow-md hover:bg-gray-100 hover:text-yellow-500 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
       role="button"
       onClick={() => {
         sendItemsToCart(item);
