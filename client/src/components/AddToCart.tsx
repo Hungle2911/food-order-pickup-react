@@ -24,6 +24,7 @@ function AddToCart({ item }) {
         sendItemsToCart(item);
       }}
     >
+      <i className="fas fa-utensils mr-2"></i>
       Add to Cart
     </button>
   );

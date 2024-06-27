@@ -31,7 +31,11 @@ function InfoForm() {
     }
   }, [orderId]);
   return (
-    <form id="orderForm" className="order-form" onSubmit={sendCartOrder}>
+    <form
+      id="orderForm"
+      className="flex flex-col gap-4 items-end text-base text-[#003f5c] mt-4 bg-white border border-gray-300 rounded-lg p-4 w-full md:w-[40%] mx-auto md:ml-auto"
+      onSubmit={sendCartOrder}
+    >
       <label htmlFor="customerName">Name</label>
       <input
         type="text"
@@ -39,13 +43,15 @@ function InfoForm() {
         placeholder="Your name"
         required=""
         onChange={(e) => setName(e.target.value)}
+        className="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-[#FFB238]"
       />
       <label htmlFor="instruction">Special instructions</label>
       <input
         type="text"
         id="instruction"
-        placeholder="Please let us know if you have any allergies "
+        placeholder="Please let us know if you have any allergies"
         onChange={(e) => setInstructions(e.target.value)}
+        className="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-[#FFB238]"
       />
       <label htmlFor="customerPhone">Phone Number</label>
       <input
@@ -55,8 +61,13 @@ function InfoForm() {
         placeholder="xxx-xxx-xxxx"
         required=""
         onChange={(e) => setPhoneNumber(e.target.value)}
+        className="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-[#FFB238]"
       />
-      <button id="placeOrderButton" type="submit" className="submit-button">
+      <button
+        id="placeOrderButton"
+        type="submit"
+        className="submit-button bg-[#FFB238] text-white font-medium py-2 px-4 rounded-full shadow-md hover:bg-yellow-500 focus:outline-none focus:border-2 focus:border-[#FFB238]"
+      >
         Place Order
       </button>
     </form>
