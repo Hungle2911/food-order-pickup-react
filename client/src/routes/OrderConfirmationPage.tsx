@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { URL } from "../components/MenuList";
+import BackToHomeButton from "../components/BackToHomeButton";
 
 const OrderConfirmationPage = () => {
   const [orderItems, setOrderItems] = useState([]);
@@ -38,22 +39,22 @@ const OrderConfirmationPage = () => {
   return (
     <>
       <NavBar />
-      <div className="order-message">
-        <p>
+      <div className="flex flex-col justify-center items-center w-1/2 bg-[white] m-auto min-h-screen">
+        <p className="text-l mb-6">
           Thank you so much for ordering. We will send you a notification as
           soon as your order is ready!
         </p>
         {orderItems.map((item, index) => (
           <ul key={index}>
             <li>
-              <p>
+              <p className=" text-neutral-700">
                 {" "}
                 {item.name} X {item.quantity}
               </p>
             </li>
           </ul>
         ))}
-        <div>
+        <div className="mt-7">
           <div>Order ID: {order.order_code}</div>
           <div>Order for: {order.client_name}</div>
           <div>Time of the order: {order.date_time}</div>
@@ -61,6 +62,7 @@ const OrderConfirmationPage = () => {
           <div>Order note: {order.instructions}</div>
           <div>Telephone: {order.phone_number}</div>
         </div>
+        <BackToHomeButton />
       </div>
       <Footer />
     </>
