@@ -13,7 +13,6 @@ export interface CartItem {
   photo_url: string;
   name: string;
   cart_id: number;
-
 }
 
 
