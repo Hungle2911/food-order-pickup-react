@@ -6,6 +6,10 @@ export interface OrderDetailsType {
   instructions: string;
   phone_number: number;
 }
+export interface OrderItem {
+  name: string;
+  quantity: number;
+}
 export interface CartItem {
   item_id: number;
   quantity: number;
@@ -14,7 +18,6 @@ export interface CartItem {
   name: string;
   cart_id: number;
 }
-
 
 export interface CartContextType {
   cartItems: CartItem[];

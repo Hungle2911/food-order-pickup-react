@@ -37,7 +37,6 @@ function CartItems() {
               <p className="cart-item-name text-[#003f5c] font-bold">
                 {item.name}
               </p>
-              <p className="text-gray-600">{item.description}</p>
             </div>
             <div className="flex flex-col items-center justify-center w-[30%] text-center">
               <p className="text-lg font-medium text-[#003f5c]">${item.cost}</p>

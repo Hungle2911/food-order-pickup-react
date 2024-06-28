@@ -1,20 +1,29 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import AddToCart from "./AddToCart";
+
 const URL = import.meta.env.VITE_API_URL;
 function MenuList() {
-  const [items, setItems] = useState([]);
   const getMenuItems = async () => {
     try {
       const response = await fetch(`${URL}/menu`);
       const result = await response.json();
-      setItems(result.data);
+      return result.data;
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {
-    getMenuItems();
-  }, []);
+  const {
+    status,
+    error,
+    data: items,
+  } = useQuery({ queryKey: ["menuItems"], queryFn: getMenuItems });
+  if (status == "pending") {
+    return <div>Loading...</div>;
+  }
+
+  if (error instanceof Error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <>
